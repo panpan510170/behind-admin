@@ -1,118 +1,62 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>free-首页</title>
+    <title>free-后台管理</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
-
-<jsp:include page="header.jsp"></jsp:include>
-  <!--content start-->
-<style>
-    .carousel-item img{
-        max-width: 100%;
-        height:auto;
-    }
-</style>
-<script>
-    $(function(){
-        //轮播图速度快慢
-        $('#myCarousel').carousel({
-            interval: 1500
-        })
-    });
-
-</script>
+<jsp:include page="common_header.jsp"></jsp:include>
 <body>
- <div id="myCarousel" class="carousel slide">
-  <!-- 轮播（Carousel）指标 -->
-  <ol class="carousel-indicators" style="display:none">
-      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-      <li data-target="#myCarousel" data-slide-to="1"></li>
-      <li data-target="#myCarousel" data-slide-to="2"></li>
-      <li data-target="#myCarousel" data-slide-to="3"></li>
-      <li data-target="#myCarousel" data-slide-to="4"></li>
-  </ol>
-  <!-- 轮播（Carousel）项目 -->
-  <div class="carousel-inner">
-      <div class="item active">
-          <img src="/r/images/lunbo/1.jpg" alt="First slide" style="width: 100%;height: 48%">
-      </div>
-      <div class="item">
-          <img src="/r/images/lunbo/2.jpg" alt="Second slide" style="width: 100%;height: 48%">
-      </div>
-      <div class="item">
-          <img src="/r/images/lunbo/3.jpg" alt="Third slide" style="width: 100%;height: 48%">
-      </div>
-      <div class="item">
-          <img src="/r/images/lunbo/4.jpg" alt="Fourth slide" style="width: 100%;height: 48%">
-      </div>
-      <div class="item">
-          <img src="/r/images/lunbo/5.jpg" alt="Fifth slide" style="width: 100%;height: 48%">
-      </div>
-  </div>
-  <!-- 轮播（Carousel）导航 -->
-  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev"></a>
-  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next"></a>
-</div>
-<style>
-    .image{width: 15%}
-    .text{width: 10%}
-    td {padding: 1%}
-</style>
-<!--推荐内容 start-->
-<div style="margin-right:15%;margin-left: 15%;margin-top: 2%;margin-bottom: 2%">
-    <nav class="navbar navbar-default" role="navigation" style="background-color: white">
-        <div class="container-fluid">
-            <div>
-                <ul class="nav navbar-nav">
-                    <%--<li class="active"><a style="font-size: 2em">推荐</a></li>--%>
-                    <li><a style="font-size: 2em">推荐</a></li>
-                    <li><a style="font-size: 2em">热门</a></li>
-                </ul>
-            </div>
-            <div style="float: right">
-                <a style="font-size: 2em">更多>>></a>
-            </div>
+<div id="wrapper">
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav metismenu" id="side-menu">
+                <li class="nav-header">
+                    <div class="dropdown profile-element">
+                        <span>
+                            <img alt="image" class="img-circle" src="img/profile_small.jpg" />
+                        </span>
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
+                            <span class="clear">
+                                <span class="block m-t-xs">
+                                    <strong class="font-bold">admin</strong>
+                                </span>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="logo-element">
+                        IN+
+                    </div>
+                </li>
+
+
+                <li>
+                    <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">系统管理</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li class="active"><a href="index.html">用户管理</a></li>
+                        <li><a href="dashboard_2.html">角色管理</a></li>
+                        <li><a href="dashboard_3.html">权限管理</a></li>
+                        <li><a href="dashboard_4_1.html">用户角色管理</a></li>
+                        <li><a href="dashboard_5.html">角色权限管理</a></li>
+                    </ul>
+                </li>
+            </ul>
         </div>
     </nav>
-    <table>
-        <tr>
-            <td class="image"><img src="r/images/index/123.jpg"></td>
-            <td class="text"><b>随心定制纯玩自由行可升级香格里拉酒店泸沽湖尊享特色客栈</b></td>
-            <td class="image"><img src="r/images/index/123.jpg"></td>
-            <td class="text"><b>随心定制纯玩自由行可升级香格里拉酒店泸沽湖尊享特色客栈</b></td>
-            <td class="image"><img src="r/images/index/123.jpg"></td>
-            <td class="text"><b>随心定制纯玩自由行可升级香格里拉酒店泸沽湖尊享特色客栈</b></td>
-        </tr>
-        <tr>
-            <td class="image"><img src="r/images/index/123.jpg"></td>
-            <td class="text"><b>随心定制纯玩自由行可升级香格里拉酒店泸沽湖尊享特色客栈</b></td>
-            <td class="image"><img src="r/images/index/123.jpg"></td>
-            <td class="text"><b>随心定制纯玩自由行可升级香格里拉酒店泸沽湖尊享特色客栈</b></td>
-            <td class="image"><img src="r/images/index/123.jpg"></td>
-            <td class="text"><b>随心定制纯玩自由行可升级香格里拉酒店泸沽湖尊享特色客栈</b></td>
-        </tr>
-        <tr>
-            <td class="image"><img src="r/images/index/123.jpg"></td>
-            <td class="text"><b>随心定制纯玩自由行可升级香格里拉酒店泸沽湖尊享特色客栈</b></td>
-            <td class="image"><img src="r/images/index/123.jpg"></td>
-            <td class="text"><b>随心定制纯玩自由行可升级香格里拉酒店泸沽湖尊享特色客栈</b></td>
-            <td class="image"><img src="r/images/index/123.jpg"></td>
-            <td class="text"><b>随心定制纯玩自由行可升级香格里拉酒店泸沽湖尊享特色客栈</b></td>
-        </tr>
-        <tr>
-            <td class="image"><img src="r/images/index/123.jpg"></td>
-            <td class="text"><b>随心定制纯玩自由行可升级香格里拉酒店泸沽湖尊享特色客栈</b></td>
-            <td class="image"><img src="r/images/index/123.jpg"></td>
-            <td class="text"><b>随心定制纯玩自由行可升级香格里拉酒店泸沽湖尊享特色客栈</b></td>
-            <td class="image"><img src="r/images/index/123.jpg"></td>
-            <td class="text"><b>随心定制纯玩自由行可升级香格里拉酒店泸沽湖尊享特色客栈</b></td>
-        </tr>
-    </table>
-</div>
-<!--推荐内容 end-->
 
+    <div id="page-wrapper" class="gray-bg dashbard-1">
+        <div class="row border-bottom">
+            <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0;background-color: #1a2d41">
+                <ul class="nav navbar-top-links navbar-right">
+                    <li>
+                        <a href="login.jsp">
+                            <i class="fa fa-sign-out"></i> 退出
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+<jsp:include page="common_footer.jsp"></jsp:include>
 </body>
-<!--content end-->
-<jsp:include page="footer.jsp"></jsp:include>
 </html>
