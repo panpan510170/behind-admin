@@ -12,7 +12,7 @@
 </head>
 <body>
 <nav class="navbar-default navbar-static-side" role="navigation">
-    <div class="sidebar-collapse">
+    <div class="sidebar-collapse" id="daohang">
         <ul class="nav metismenu" id="side-menu">
             <li class="nav-header">
                 <div class="dropdown profile-element">
@@ -33,14 +33,14 @@
             </li>
 
 
-            <li class="action" id="213">
+            <li>
                 <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">系统管理</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-                    <li class="action sonDao"><a href="/view/system/suserList.jsp">系统用户管理</a></li>
-                    <li class="sonDao"><a href="/view/system/suserList.jsp">角色管理</a></li>
-                    <li class="sonDao"><a href="/view/system/suserList.jsp">权限管理</a></li>
-                    <li class="sonDao"><a href="/view/system/suserList.jsp">用户角色管理</a></li>
-                    <li class="sonDao"><a href="/view/system/suserList.jsp">角色权限管理</a></li>
+                    <li name="sonDao"><a href="/view/system/suserList.jsp">系统用户管理</a></li>
+                    <li name="sonDao"><a href="/view/system/suserList.jsp">角色管理</a></li>
+                    <li name="sonDao"><a href="/view/system/suserList.jsp">权限管理</a></li>
+                    <li name="sonDao"><a href="/view/system/suserList.jsp">用户角色管理</a></li>
+                    <li name="sonDao"><a href="/view/system/suserList.jsp">角色权限管理</a></li>
                 </ul>
             </li>
         </ul>
@@ -63,10 +63,27 @@
 <jsp:include page="/common_footer.jsp"></jsp:include>
 <script>
 
- /*   $("[name='sonDao']").click(
-        alert("12312");
-        var id=$(this).parent().parent().attr('id');
-    );*/
+    $("#daohang ul li").each(function(index){
+        $(this).click(function(){
+            alert("点击的是这个"+index);
+            $("#daohang ul li").removeClass("active");
+            $(this).addClass("active");
+            $(this).parent('li').addClass("active");
+        });
+    });
+
+    $("[name='sonDao']").click(function(){
+        var uarry=$("[name='sonDao'] li");
+        alert(uarry);
+        var count=$(this).index();//获取li的下标
+        alert(count);
+
+        var a = uarry.eq(count).text();
+        alert(a);
+       /* var id = $("[name='sonDao']").text();
+        alert(id);
+        $("[name='sonDao']").parent('li').addClass('active');*/
+    });
 
     /*
         sessionStorage.setItem("key","value");//保存数据到sessionStorage

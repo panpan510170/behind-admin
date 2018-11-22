@@ -50,7 +50,7 @@
 <!-- Toastr -->
 <script src="/js/plugins/toastr/toastr.min.js"></script>
 
-
+<script src="/js/contabs.min.js"></script>
 <script>
     var url = "http://localhost:8001";//全局常量
 
@@ -62,7 +62,7 @@
                 showMethod: 'slideDown',
                 timeOut: 4000
             };
-            toastr.success('Responsive Admin Theme', 'Welcome to INSPINIA');
+            /*toastr.success('Responsive Admin Theme', 'Welcome to INSPINIA');*/
 
         }, 1300);
 
