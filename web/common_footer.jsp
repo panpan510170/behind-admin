@@ -50,7 +50,10 @@
 <!-- Toastr -->
 <script src="/js/plugins/toastr/toastr.min.js"></script>
 
-<script src="/js/contabs.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+<script src="/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
 <script>
     var url = "http://localhost:8001";//全局常量
 
