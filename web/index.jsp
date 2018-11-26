@@ -6,6 +6,7 @@
 </head>
 <jsp:include page="common_header.jsp"></jsp:include>
 <body>
+
 <div id="wrapper">
     <nav class="navbar-default navbar-static-side" role="navigation">
         <div class="sidebar-collapse" id="daohang">
@@ -40,7 +41,7 @@
                     </ul>
                 </li>
 
-                <li>
+                <%--<li>
                     <a><i class="fa fa-th-large"></i> <span class="nav-label">系统管理123</span> <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li><a href="/view/system/suserList.jsp" target="content">系统用户管理123</a></li>
@@ -49,7 +50,7 @@
                         <li><a href="/view/system/suserList.jsp" target="content">用户角色管理123</a></li>
                         <li><a href="/view/system/suserList.jsp" target="content">角色权限管理123</a></li>
                     </ul>
-                </li>
+                </li>--%>
             </ul>
         </div>
     </nav>
@@ -74,9 +75,11 @@
     </div>
 </div>
 <jsp:include page="/common_footer.jsp"></jsp:include>
-<script>
+<script type="text/javascript">
+
     var userId = sessionStorage.getItem("userId");
     var token = sessionStorage.getItem("token");
+
     $.ajax({
         url: url+"/system/userPermissionsList",
         type: "post",
@@ -88,18 +91,26 @@
         success: function (obj) {
             if(1 != obj.code){
                 sweetAlert(obj.message);
+                location.href = "login.jsp";
             }else{
                 $.each(obj.data ,function (index,value) {
-                    /*append("<option value='"+obj.rows[i].id+"'>"+obj.rows[i].permissionsName+"</option>")*/
-                    alert(value.name);
-                    alert(value.list);
-                   /* $("#side-menu").append("<li>");
-                    $("#side-menu").append("<a><i class="+"fa fa-th-large"+"></i> <span class="+"nav-label"+"></span></a>");
-                    $("#side-menu").append("<ul class="+"nav nav-second-level"+">");*/
+                    /*alert(value.name);
+                    alert(value.list);*/
+                    $("#side-menu").append(
+                        "<li class="+'"zhui"'+">" +
+                        "<a class="+'"zhui"'+">" +
+                        "<i class="+'"fa fa-th-large"'+"></i>" +
+                        "<span class="+'"nav-label zhui"'+">"+value.name+"</span>" +
+                        "<span class="+'"fa arrow"'+"></span>" +
+                        "</a>" +
+                        "<ul class="+'"nav nav-second-level collapse"'+" id='"+value.name+"'></ul>" +
+                        "</li>")
+                    var id = value.name;
                     $.each(value.list ,function (index,value) {
-                        alert(value.name);
+                        /*alert(value.name);*/
+                        $("#"+id).append("<li class="+'"quanxian"'+"><a href='"+value.url+"' target="+"content"+">"+value.name+"</a></li>");
                     });
-                   /* $("#side-menu").append("</li>");*/
+
                 });
             }
         },
@@ -108,16 +119,20 @@
         }
     });
 
-    $(function(){
-        $("#daohang ul li").each(function(index){
-            $(this).click(function(){
-                /*alert("点击的是这个"+index);*/
-                $("#daohang ul li").removeClass("active");
-                $(this).addClass("active");
-                $(this).parent('li').addClass("active");
-            });
-        });
-    })
+
+    $("body").on("click","li",function(){
+        /*alert("事件绑定成功！");*/
+
+        $(this).siblings('li').removeClass('active');
+        $("ul").removeClass('in');
+        $(this).addClass('active');
+        $(this).children("ul").addClass('in');
+
+        /*$(this).addClass("active");
+        $(this).parent().addClass("in");
+        $(this).parent('li').addClass("active");*/
+    });
+
 
     /*
         sessionStorage.setItem("key","value");//保存数据到sessionStorage

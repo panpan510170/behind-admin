@@ -45,7 +45,8 @@
     /*$(function () {
 
     });*/
-
+    var userId = sessionStorage.getItem("userId");
+    var token = sessionStorage.getItem("token");
 
     //导出
     $("#btn_export").click(function () {
@@ -74,6 +75,9 @@
         dataType: "json",//期待返回数据类型
         searchAlign: "left",//查询框对齐方式
         queryParamsType: "limit",//查询参数组织方式
+        ajaxOptions:{
+                headers:{"Access-Token":token,"Access-Source":"2"},
+        },
         queryParams: function queryParams(params) {   //设置查询参数
             var param = {
                 "pageSize": params.limit,

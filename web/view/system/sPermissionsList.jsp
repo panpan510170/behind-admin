@@ -127,6 +127,9 @@
     /*$(function () {
 
     });*/
+    var userId = sessionStorage.getItem("userId");
+    var token = sessionStorage.getItem("token");
+
     function add(){
         var flag = true;
         var type = $("#type option:selected").val();
@@ -160,9 +163,11 @@
                 contentType:"application/json",
                 data:JSON.stringify(param),
                 dataType: "json",
+                headers:{"Access-Token":token,"Access-Source":"2"},
                 success: function (obj) {
                     if(1 != obj.code){
                         sweetAlert(obj.message);
+                        location.href = "login.jsp";
                     }else{
                         location.href = "/view/system/sPermissionsList.jsp";
                     }
@@ -191,9 +196,11 @@
                 contentType:"application/json",
                 data:JSON.stringify(param),
                 dataType: "json",
+                headers:{"Access-Token":token,"Access-Source":"2"},
                 success: function (obj) {
                     if(null == obj || "" == obj){
                         sweetAlert("查询错误");
+                        location.href = "login.jsp";
                     }else{
                         for (var i = 0; i < obj.rows.length; i++) {
                             $("#parentId").append("<option value='"+obj.rows[i].id+"'>"+obj.rows[i].permissionsName+"</option>");
@@ -238,6 +245,9 @@
         dataType: "json",//期待返回数据类型
         searchAlign: "left",//查询框对齐方式
         queryParamsType: "limit",//查询参数组织方式
+        ajaxOptions:{
+            headers:{"Access-Token":token,"Access-Source":"2"},
+        },
         queryParams: function queryParams(params) {   //设置查询参数
             var param = {
                 "pageSize": params.limit,
