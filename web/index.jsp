@@ -30,18 +30,18 @@
 
 
                 <li>
-                    <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">系统管理</span> <span class="fa arrow"></span></a>
+                    <a><i class="fa fa-th-large"></i> <span class="nav-label">系统管理</span> <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li><a href="/view/system/suserList.jsp" target="content">系统用户管理</a></li>
-                        <li><a href="/view/system/suserList.jsp" target="content">角色管理</a></li>
-                        <li><a href="/view/system/suserList.jsp" target="content">权限管理</a></li>
+                        <li><a href="/view/system/sroleList.jsp" target="content">角色管理</a></li>
+                        <li><a href="/view/system/sPermissionsList.jsp" target="content">权限管理</a></li>
                         <li><a href="/view/system/suserList.jsp" target="content">用户角色管理</a></li>
                         <li><a href="/view/system/suserList.jsp" target="content">角色权限管理</a></li>
                     </ul>
                 </li>
 
                 <li>
-                    <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">系统管理123</span> <span class="fa arrow"></span></a>
+                    <a><i class="fa fa-th-large"></i> <span class="nav-label">系统管理123</span> <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li><a href="/view/system/suserList.jsp" target="content">系统用户管理123</a></li>
                         <li><a href="/view/system/suserList.jsp" target="content">角色管理123</a></li>
@@ -75,6 +75,39 @@
 </div>
 <jsp:include page="/common_footer.jsp"></jsp:include>
 <script>
+    var userId = sessionStorage.getItem("userId");
+    var token = sessionStorage.getItem("token");
+    $.ajax({
+        url: url+"/system/userPermissionsList",
+        type: "post",
+        data:{
+            "userId":userId
+        },
+        dataType: "json",
+        headers:{"Access-Token":token,"Access-Source":"2"},
+        success: function (obj) {
+            if(1 != obj.code){
+                sweetAlert(obj.message);
+            }else{
+                $.each(obj.data ,function (index,value) {
+                    /*append("<option value='"+obj.rows[i].id+"'>"+obj.rows[i].permissionsName+"</option>")*/
+                    alert(value.name);
+                    alert(value.list);
+                   /* $("#side-menu").append("<li>");
+                    $("#side-menu").append("<a><i class="+"fa fa-th-large"+"></i> <span class="+"nav-label"+"></span></a>");
+                    $("#side-menu").append("<ul class="+"nav nav-second-level"+">");*/
+                    $.each(value.list ,function (index,value) {
+                        alert(value.name);
+                    });
+                   /* $("#side-menu").append("</li>");*/
+                });
+            }
+        },
+        error: function (obj) {
+            alert(obj);
+        }
+    });
+
     $(function(){
         $("#daohang ul li").each(function(index){
             $(this).click(function(){

@@ -50,12 +50,31 @@
 <!-- Toastr -->
 <script src="/js/plugins/toastr/toastr.min.js"></script>
 
-<script src="/js/bootstrap.min.js"></script>
+<!-- 弹窗 -->
+<script src="/js/sweetalert.min.js"></script>
+
 <script src="/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
 <script src="/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
 <script src="/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+
 <script>
-    var url = "http://localhost:8001";//全局常量
+    var url = "http://localhost:8888";//全局常量
+
+    //转换日期格式(时间戳转换为datetime格式)
+    function changeDateFormat(cellval) {
+        var dateVal = cellval + "";
+        if (cellval != null) {
+            var date = new Date(parseInt(dateVal.replace("/Date(", "").replace(")/", ""), 10));
+            var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+            var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+
+            var hours = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+            var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+            var seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+
+            return date.getFullYear() + "-" + month + "-" + currentDate + " " + hours + ":" + minutes + ":" + seconds;
+        }
+    }
 
     $(document).ready(function() {
         setTimeout(function() {

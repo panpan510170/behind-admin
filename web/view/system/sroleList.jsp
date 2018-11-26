@@ -18,9 +18,9 @@
         <div class="panel-body">
             <form id="formSearch" class="form-horizontal">
                 <div class="form-group">
-                    <label class="control-label col-sm-2" for="userName">用户名</label>
+                    <label class="control-label col-sm-2" for="roleName">角色名称</label>
                     <div class="col-sm-2">
-                        <input type="text" class="form-control" id="userName" name="userName">
+                        <input type="text" class="form-control" id="roleName" name="roleName">
                     </div>
                     <div class="col-sm-2" style="text-align:right;">
                         <button type="button" id="btn_query" class="btn btn-primary">查询</button>
@@ -63,7 +63,7 @@
     });
 
     $('#tb_list').bootstrapTable({
-        url: url+"/system/getUserList",         /*请求后台的URL（*）*/
+        url: url+"/system/getRoleList",         /*请求后台的URL（*）*/
         method: 'post',                      /*请求方式（*）*/
         search: false,//是否搜索
         pagination: true,//是否分页
@@ -78,7 +78,7 @@
             var param = {
                 "pageSize": params.limit,
                 "pageNo": params.offset,
-                "userName": $("#userName").val()
+                "roleName": $("#roleName").val()
             };
             return param;
         },
@@ -103,16 +103,12 @@
                 }
             },
             {
-                title: "用户名",//标题
-                field: "userName"
+                title: "角色名称",//标题
+                field: "roleName"
             },
             {
-                title: "手机号",//标题
-                field: "phone"
-            },
-            {
-                title: "状态",//标题
-                field: "status"
+                title: "描述",//标题
+                field: "descrition"
             },
             {
                 title: "创建时间",//标题

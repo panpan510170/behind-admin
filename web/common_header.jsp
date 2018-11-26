@@ -17,7 +17,8 @@
     <link href="/js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
     <link href="/css/animate.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
-
+    <!--弹窗-->
+    <link href="/css/sweetalert.css" rel="stylesheet">
 </head>
 <body>
 

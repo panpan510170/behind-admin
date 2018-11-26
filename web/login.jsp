@@ -49,10 +49,13 @@
                     sweetAlert(obj.message);
                 }else{
                     /*alert(obj.data.token);
-                    alert(obj.data.userName);*/
+                    alert(obj.data.userName);
+                    alert(obj.data.userId);*/
                     sessionStorage.setItem("token",obj.data.token);
+                    sessionStorage.setItem("userId",obj.data.userId);
                     sessionStorage.setItem("userName",obj.data.userName);
                     location.href="index.jsp";
+
                 }
             },
             error: function (obj) {
