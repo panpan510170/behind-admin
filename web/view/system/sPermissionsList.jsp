@@ -299,6 +299,13 @@
                 formatter: function (value, row, index) {
                     return changeDateFormat(value)
                 }
+            },
+            {
+                title: "操作",//标题
+                field: "id",
+                formatter: function (value, row, index) {
+                    return '<a onclick="delPermissions('+row.id+')">删除</a>';
+                }
             }
         ], onLoadSuccess: function () {
 
@@ -308,8 +315,30 @@
     });
 
 
-    function detailed(id){
-        location.href = "/business/issuer/v_issuerAccountDetailed.do?id=" + id;
+    function delPermissions(id){
+        var param = {
+            id:id
+        };
+        $.ajax({
+            url: url+"/system/delPermissions",
+            type: "post",
+            contentType:"application/json",
+            data:JSON.stringify(param),
+            dataType: "json",
+            headers:{"Access-Token":token,"Access-Source":"2"},
+            success: function (obj) {
+                if(null == obj || "" == obj){
+                    sweetAlert("查询错误");
+                    location.href = "login.jsp";
+                }else{
+                    location.href = "/view/system/sPermissionsList.jsp";
+                }
+
+            },
+            error: function (obj) {
+                alert(obj);
+            }
+        });
     }
 </script>
 </body>

@@ -18,6 +18,10 @@
         <div class="panel-body">
             <form id="formSearch" class="form-horizontal">
                 <div class="form-group">
+                    <label class="control-label col-sm-2" for="userName">角色名称</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" id="userName" name="userName">
+                    </div>
                     <label class="control-label col-sm-2" for="roleName">角色名称</label>
                     <div class="col-sm-2">
                         <input type="text" class="form-control" id="roleName" name="roleName">
@@ -40,62 +44,14 @@
         </div>
     </div>
 </div>
-
-<!-- 增加 -->
-<div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content animated bounceInRight">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title">分配权限</h4>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <div id="tree"></div>
-                    <input type="hidden" id="roleId"/>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-white" data-dismiss="modal" onclick="down()">关闭</button>
-                <button type="button" class="btn btn-primary" onclick="savePermissions()">保存</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <jsp:include page="/common_footer.jsp"></jsp:include>
 <script>
+    /*$(function () {
+
+    });*/
+
     var userId = sessionStorage.getItem("userId");
     var token = sessionStorage.getItem("token");
-
-   function savePermissions() {
-       var ids = $('#tree').treeview('getChecked');
-       var param = {
-           roleId:$("#roleId").val(),
-           rolePermissionsList:ids
-       };
-       $.ajax({
-           url: url + "/system/saveRolePermissionsTree",
-           type: "post",
-           contentType:"application/json",
-           data:JSON.stringify(param),
-           dataType: "json",
-           headers:{"Access-Token":token,"Access-Source":"2"},
-           success: function (obj) {
-               if(1 != obj.code){
-                   sweetAlert(obj.message);
-                   location.href = "login.jsp";
-               }else{
-                   location.href = "/view/system/sroleList.jsp";
-               }
-           },
-           error: function (result) {
-               alert(result)
-           }
-       });
-   }
-
-
 
     //导出
     $("#btn_export").click(function () {
@@ -113,7 +69,7 @@
     });
 
     $('#tb_list').bootstrapTable({
-        url: url+"/system/getRoleList",         /*请求后台的URL（*）*/
+        url: url+"/system/getUserRoleList",         /*请求后台的URL（*）*/
         method: 'post',                      /*请求方式（*）*/
         search: false,//是否搜索
         pagination: true,//是否分页
@@ -131,7 +87,8 @@
             var param = {
                 "pageSize": params.limit,
                 "pageNo": params.offset,
-                "roleName": $("#roleName").val()
+                "roleName": $("#roleName").val(),
+                "userName": $("#userName").val()
             };
             return param;
         },
@@ -149,11 +106,15 @@
         silentSort: false,
         columns: [
             {
-                title: "id",//标题
+                title: "用户id",//标题
                 field: "id",
                 formatter: function (value, row, index) {
                     return '<a onclick="detailed('+row.id+')">'+value+'</a>';
                 }
+            },
+            {
+                title: "用户名称",//标题
+                field: "userName"
             },
             {
                 title: "角色名称",//标题
@@ -162,20 +123,6 @@
             {
                 title: "描述",//标题
                 field: "descrition"
-            },
-            {
-                title: "创建时间",//标题
-                field: "createTime",
-                formatter: function (value, row, index) {
-                    return changeDateFormat(value)
-                }
-            },
-            {
-                title: "操作",//标题
-                field: "id",
-                formatter: function (value, row, index) {
-                    return '<a onclick="showUpdatePermissions('+row.id+')">修改权限</a>';
-                }
             }
         ], onLoadSuccess: function () {
 
@@ -185,35 +132,8 @@
     });
 
 
-    function showUpdatePermissions(id){
-        var param = {
-            roleId:id
-        };
-        $.ajax({
-            url: url+"/system/rolePermissionsTreeList",
-            type: "post",
-            contentType:"application/json",
-            data:JSON.stringify(param),
-            dataType: "json",
-            headers:{"Access-Token":token,"Access-Source":"2"},
-            success: function (result) {
-                /*alert(result.data);*/
-                $('#tree').treeview({
-                    data: result.data,
-                    showIcon: false,
-                    showCheckbox: true
-                });
-                $("#roleId").val(id);
-                $("#myModal").show();
-            },
-            error: function () {
-                alert("树形结构加载失败！")
-            }
-        });
-    }
-
-    function down() {
-        $("#myModal").hide();
+    function detailed(id){
+        location.href = "/business/issuer/v_issuerAccountDetailed.do?id=" + id;
     }
 </script>
 </body>

@@ -30,7 +30,7 @@
                 </li>
 
 
-                <li>
+                <%--<li>
                     <a><i class="fa fa-th-large"></i> <span class="nav-label">系统管理</span> <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li><a href="/view/system/suserList.jsp" target="content">系统用户管理</a></li>
@@ -41,7 +41,7 @@
                     </ul>
                 </li>
 
-                <%--<li>
+                <li>
                     <a><i class="fa fa-th-large"></i> <span class="nav-label">系统管理123</span> <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li><a href="/view/system/suserList.jsp" target="content">系统用户管理123</a></li>

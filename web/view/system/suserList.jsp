@@ -120,7 +120,10 @@
             },
             {
                 title: "创建时间",//标题
-                field: "createTime"
+                field: "createTime",
+                formatter: function (value, row, index) {
+                    return changeDateFormat(value)
+                }
             }
         ], onLoadSuccess: function () {
 

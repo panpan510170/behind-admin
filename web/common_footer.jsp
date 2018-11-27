@@ -16,7 +16,8 @@
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 <script src="/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-
+<!-- tree -->
+<script src="/js/plugins/treeview/bootstrap-treeview.js"></script>
 <!-- Flot -->
 <script src="/js/plugins/flot/jquery.flot.js"></script>
 <script src="/js/plugins/flot/jquery.flot.tooltip.min.js"></script>
