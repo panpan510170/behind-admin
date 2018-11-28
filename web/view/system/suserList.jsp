@@ -30,8 +30,8 @@
         </div>
     </div>
     <div id="toolbar" class="btn-group">
-        <button id="btn_export" type="button" class="btn btn-primary">
-            <span class="glyphicon glyphicon-export" aria-hidden="true"></span>导出
+        <button id="btn_add" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>增加
         </button>
     </div>
     <div class="example-wrap">
@@ -40,13 +40,91 @@
         </div>
     </div>
 </div>
+
+<!-- 增加 -->
+<div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content animated bounceInRight">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">新增用户</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <table>
+                        <tr>
+                            <td style="text-align: center;padding: 30px;font-size: 1em">
+                                <label>用户名称:</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="text" placeholder="用户名称" class="form-control" id="suserName">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;padding: 30px;font-size: 1em">
+                                <label>联系电话:</label>
+                            </td>
+                            <td style="text-align: center;">
+                                <input type="text" placeholder="联系电话" class="form-control" id="phone">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="addUser()">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
 <jsp:include page="/common_footer.jsp"></jsp:include>
 <script>
-    /*$(function () {
 
-    });*/
     var userId = sessionStorage.getItem("userId");
     var token = sessionStorage.getItem("token");
+
+    function addUser(){
+        var flag = true;
+        var suserName = $("#suserName").val();
+        var phone = $("#phone").val();
+
+        if("" == suserName || null == suserName){
+            flag = false;
+        }
+        if("" == phone || null == phone){
+            flag = false;
+        }
+
+        if(flag){
+            var param = {
+                "userName" : suserName,
+                "phone" : phone
+            };
+
+            $.ajax({
+                url: url+"/system/addSystemUser",
+                type: "post",
+                contentType:"application/json",
+                data:JSON.stringify(param),
+                dataType: "json",
+                headers:{"Access-Token":token,"Access-Source":"2"},
+                success: function (obj) {
+                    if(1 != obj.code){
+                        sweetAlert(obj.message);
+                        location.href = "login.jsp";
+                    }else{
+                        location.href = "/view/system/suserList.jsp";
+                    }
+                },
+                error: function (obj) {
+                    alert(obj);
+                }
+            });
+        }else{
+            sweetAlert("参数不对")
+        }
+    }
 
     //导出
     $("#btn_export").click(function () {
