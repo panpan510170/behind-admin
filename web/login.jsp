@@ -26,6 +26,7 @@
             <div class="form-group">
                 <input type="password" class="form-control" placeholder="Password" required="" id="password">
             </div>
+
             <button type="button" class="btn btn-primary block full-width m-b" onclick="login()">Login</button>
 
             <%--<a href="login.html#"><small>Forgot password?</small></a>--%>
@@ -58,8 +59,16 @@
 
                 }
             },
-            error: function (obj) {
-                alert(obj);
+            /*error: function (obj) {
+                alert(obj.message);
+            }*/
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert("jqXHR.responseText:"+"["+jqXHR.responseText+"]---"+
+                    "jqXHR.status"+"["+jqXHR.status+"]---"+
+                    "jqXHR.readyState"+"["+jqXHR.readyState+"]---"+
+                    "jqXHR.statusText"+"["+jqXHR.statusText+"]---"+
+                    "textStatus"+"["+textStatus+"]---"+
+                    "errorThrown"+"["+errorThrown+"]");
             }
         });
     }
