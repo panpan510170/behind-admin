@@ -28,7 +28,11 @@
             </div>
 
             <button type="button" class="btn btn-primary block full-width m-b" onclick="login()">Login</button>
-
+            <%--<shiro:hasPermission name="/business/issuer/v_add.do">
+                <button id="btn_add" type="button" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>添加
+                </button>
+            </shiro:hasPermission>--%>
             <%--<a href="login.html#"><small>Forgot password?</small></a>--%>
         </form>
     </div>
@@ -38,7 +42,7 @@
     function login() {
 
         $.ajax({
-            url: url+"/system/login",
+            url: url+"/system/login1",
             type: "post",
             data:{
                 "userName":$("#userName").val(),
@@ -55,8 +59,6 @@
                     sessionStorage.setItem("token",obj.data.token);
                     sessionStorage.setItem("userId",obj.data.userId);
                     sessionStorage.setItem("userName",obj.data.userName);
-                    location.href="index.jsp";
-
                 }
             },
             /*error: function (obj) {
